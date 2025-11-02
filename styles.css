@@ -1,0 +1,107 @@
+* { box-sizing: border-box; }
+:root {
+  --bg: #0b0d12;
+  --panel: #121520;
+  --muted: #98a1b3;
+  --text: #e6e8ef;
+  --brand: #6ee7ff;
+  --brand-2: #9bffb1;
+  --accent: #f6c177;
+  --danger: #ff6b6b;
+  --border: #232a3a;
+  --tooltip: #10131b;
+}
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  background: linear-gradient(180deg, #0b0d12 0%, #0f1421 100%);
+  color: var(--text);
+}
+
+.app-header, .app-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; border-bottom: 1px solid var(--border);
+  background: rgba(10,12,18,0.7); backdrop-filter: blur(8px);
+}
+.app-footer { border-top: 1px solid var(--border); border-bottom: none; font-size: 12px; color: var(--muted); }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #0a0d14; font-weight: 800; padding: 4px 8px; border-radius: 6px; }
+.brand-name { font-weight: 600; letter-spacing: .2px; }
+.actions { display: flex; gap: 8px; align-items: center; }
+
+.btn { background: var(--panel); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+.btn:hover { border-color: #2d3548; }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--muted); }
+.dropdown { position: relative; }
+.dropdown-menu { position: absolute; top: 120%; right: 0; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 8px; display: none; min-width: 160px; z-index: 20; }
+.dropdown-menu button, .dropdown-menu label { width: 100%; text-align: left; background: transparent; border: none; color: var(--text); padding: 8px; border-radius: 6px; cursor: pointer; }
+.dropdown-menu button:hover, .dropdown-menu label:hover { background: #1a1f2d; }
+.dropdown.open .dropdown-menu { display: block; }
+.file-input input { display: none; }
+.file-input span { display: inline-block; width: 100%; }
+
+.app-main { max-width: 1100px; margin: 10px auto; padding: 0 16px 20px; }
+.toolbar { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: rgba(10,12,18,0.7); backdrop-filter: blur(8px); padding: 8px; border: 1px solid var(--border); border-radius: 12px; }
+.tool-group { display: inline-flex; align-items: center; gap: 6px; padding: 6px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; }
+.tool-group select { background: #0f1320; color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; }
+.tool-group button { background: transparent; border: none; color: var(--text); padding: 6px 8px; border-radius: 8px; cursor: pointer; }
+.tool-group button:hover { background: #1a1f2d; }
+.sep { width: 1px; height: 22px; background: var(--border); display: inline-block; margin: 0 6px; }
+.color-pick { display: inline-flex; align-items: center; gap: 6px; padding: 0 6px; }
+.color-pick input { width: 24px; height: 24px; border: none; background: transparent; }
+
+.editor-wrap { margin-top: 12px; }
+.editor {
+  min-height: 60vh; padding: 24px; border: 1px solid var(--border); border-radius: 12px;
+  background: #0d111a; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+  line-height: 1.7; font-size: 16px;
+}
+.editor:focus { outline: 2px solid #22304f; }
+.editor h1, .editor h2, .editor h3 { line-height: 1.25; margin: 1.2em 0 .4em; }
+.editor h1 { font-size: 2rem; }
+.editor h2 { font-size: 1.6rem; }
+.editor h3 { font-size: 1.3rem; }
+.editor blockquote {
+  border-left: 4px solid var(--accent); padding: 8px 12px; margin: 12px 0; background: #121725; border-radius: 8px;
+}
+.editor pre { background: #0f1423; padding: 12px; border-radius: 8px; overflow: auto; border: 1px solid var(--border); }
+.editor table { border-collapse: collapse; margin: 10px 0; }
+.editor td, .editor th { border: 1px solid #2c3448; padding: 8px 10px; }
+.editor img { max-width: 100%; border-radius: 10px; border: 1px solid #1f2636; }
+
+/* Tooltip decor */
+.editor [data-tooltip] { position: relative; border-bottom: 1px dotted var(--accent); cursor: help; }
+.editor [data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: calc(100% + 8px);
+  background: var(--tooltip); color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; white-space: nowrap;
+  opacity: 0; pointer-events: none; transition: opacity .15s ease;
+}
+.editor [data-tooltip]:hover::after { opacity: 1; }
+
+.panel { margin-top: 10px; padding: 10px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; }
+.panel.hidden { display: none; }
+.panel .panel-row { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
+.panel input { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: #0f1320; color: var(--text); }
+
+/* Dialogs */
+dialog::backdrop { background: rgba(0,0,0,.4); }
+dialog { border: none; padding: 0; background: transparent; }
+.modal { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px; width: min(520px, 92vw); }
+.modal h3 { margin: 0 0 10px; }
+.modal label { display: block; margin: 8px 0; color: var(--muted); }
+.modal input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: #0f1320; color: var(--text); }
+.modal menu { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+.or { text-align: center; margin: 6px 0; color: var(--muted); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+/* Selection highlight for find */
+.find-highlight { background: rgba(255, 227, 120, 0.35); border-radius: 4px; box-shadow: 0 0 0 1px rgba(255,227,120,0.4) inset; }
+
+@media (max-width: 720px) {
+  .tool-group { width: 100%; }
+  .actions { flex-wrap: wrap; }
+}
